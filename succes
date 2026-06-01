@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Univers des Succès — Keb & Bek</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0d0b;
+    --ink-2: #1a1612;
+    --amber: #c8873a;
+    --amber-light: #e8a855;
+    --amber-glow: rgba(200,135,58,0.2);
+    --lavender: #9b8ec4;
+    --lavender-light: #c5bce0;
+    --sage: #7a9e87;
+    --cream: #f5f0e8;
+    --cream-dim: rgba(245,240,232,0.6);
+    --cream-faint: rgba(245,240,232,0.08);
+    --gold: #d4af6a;
+    --blue-dust: #8aabcc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(to bottom, rgba(15,13,11,0.95), transparent);
+  }
+
+  .nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--amber-light); }
+  .nav-back::before { content: '←'; }
+
+  .nav-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.2);
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 8rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .page-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s ease forwards;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s ease forwards;
+  }
+
+  .page-title em {
+    font-style: italic;
+    color: var(--amber-light);
+  }
+
+  .page-desc {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    max-width: 480px;
+    margin: 1.2rem auto 0;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s ease forwards;
+  }
+
+  .page-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--amber);
+    margin: 2rem auto;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.3s ease forwards;
+  }
+
+  /* ── CATÉGORIE LABEL ── */
+  .category-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-icon {
+    flex-shrink: 0;
+  }
+
+  .category-info {
+    flex: 1;
+  }
+
+  .category-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.3rem;
+    opacity: 0.7;
+  }
+
+  .category-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .category-rule {
+    flex: 1;
+    height: 1px;
+    background: rgba(245,240,232,0.07);
+  }
+
+  /* ── GRILLE DE SUCCÈS ── */
+  .succes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* ── CARTE DE SUCCÈS ── */
+  .succes-card {
+    position: relative;
+    border: 1px solid rgba(245,240,232,0.07);
+    border-radius: 16px;
+    background: rgba(245,240,232,0.025);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .succes-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    border-color: rgba(245,240,232,0.18);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+
+  /* Ligne d'accent en haut */
+  .succes-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--card-color, var(--amber)), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .succes-card:hover::before { opacity: 1; }
+
+  /* Badge dans le coin supérieur droit */
+  .card-badge-corner {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0.4;
+  }
+
+  .card-sticker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .card-sticker img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+    transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
+  }
+  .succes-card:hover .card-sticker img {
+    transform: scale(1.08) rotate(-2deg);
+  }
+
+  .card-body {
+    padding: 0 1.4rem 1.6rem;
+  }
+
+  .card-numero {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    color: rgba(245,240,232,0.2);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+    color: var(--cream);
+  }
+
+  .card-name em {
+    font-style: italic;
+    color: var(--card-color, var(--amber-light));
+  }
+
+  .card-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(245,240,232,0.35);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .card-pts {
+    color: var(--card-color, var(--amber-light));
+    font-weight: 500;
+  }
+
+  .card-sep { opacity: 0.3; }
+
+  .card-condition {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.4);
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+  }
+
+  .card-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.25);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .succes-card:hover .card-cta {
+    color: var(--card-color, var(--amber-light));
+  }
+  .card-cta::after { content: '→'; }
+
+  /* ── COULEURS PAR CATÉGORIE ── */
+  .card-1etoile { --card-color: var(--lavender-light); }
+  .card-2etoiles { --card-color: var(--gold); }
+
+  /* ── TROPHÉE SVG INLINE (coin de carte) ── */
+  .trophy-mini svg {
+    display: block;
+  }
+
+  /* ── SECTION INTRO TROPHÉES ── */
+  .intro-rule {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+  }
+
+  .intro-pills {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s ease forwards;
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    border: 1px solid rgba(245,240,232,0.08);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(245,240,232,0.35);
+  }
+
+  .pill-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .pill strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(245,240,232,0.05);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.15);
+  }
+  footer span { color: var(--amber); opacity: 0.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Animation d'entrée des cartes ── */
+  .succes-card {
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .succes-card:nth-child(1) { animation-delay: 0.5s; }
+  .succes-card:nth-child(2) { animation-delay: 0.65s; }
+  .succes-card:nth-child(3) { animation-delay: 0.8s; }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <a href="index.html" class="nav-back">L'Univers</a>
+  <span class="nav-title">· L'univers des succès</span>
+</nav>
+
+<!-- ══ EN-TÊTE ══ -->
+<div class="page-header">
+  <div class="page-eyebrow">Keb &amp; Bek · Cours de français québécois</div>
+  <h1 class="page-title">L'univers des <em>succès</em></h1>
+  <div class="page-divider"></div>
+  <p class="page-desc">Des badges à débloquer au fil du cours — chaque succès récompense un moment de présence, d'audace ou d'ingéniosité.</p>
+</div>
+
+<!-- ══ PILULES D'INFO ══ -->
+<div class="intro-rule">
+  <div class="intro-pills">
+
+    <!-- Trophée 1 étoile -->
+    <div class="pill">
+      <svg class="pill-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="6" fill="rgba(155,142,196,0.1)"/>
+        <!-- Coupe -->
+        <path d="M10 7h8v6c0 2.8-1.8 5-4 5s-4-2.2-4-5V7z" stroke="#c5bce0" stroke-width="1.2" fill="none"/>
+        <!-- Anses -->
+        <path d="M10 9H8c0 2.5 1 4 2 4.5" stroke="#c5bce0" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <path d="M18 9h2c0 2.5-1 4-2 4.5" stroke="#c5bce0" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <!-- Pied -->
+        <line x1="14" y1="18" x2="14" y2="20.5" stroke="#c5bce0" stroke-width="1.2"/>
+        <line x1="11" y1="20.5" x2="17" y2="20.5" stroke="#c5bce0" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Étoile -->
+        <text x="14" y="13.5" text-anchor="middle" font-size="5" fill="#c5bce0">★</text>
+      </svg>
+      <span><strong>1 étoile</strong> · 5 points</span>
+    </div>
+
+    <!-- Trophée 2 étoiles -->
+    <div class="pill">
+      <svg class="pill-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="6" fill="rgba(212,175,106,0.1)"/>
+        <path d="M10 7h8v6c0 2.8-1.8 5-4 5s-4-2.2-4-5V7z" stroke="#d4af6a" stroke-width="1.2" fill="none"/>
+        <path d="M10 9H8c0 2.5 1 4 2 4.5" stroke="#d4af6a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <path d="M18 9h2c0 2.5-1 4-2 4.5" stroke="#d4af6a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <line x1="14" y1="18" x2="14" y2="20" stroke="#d4af6a" stroke-width="1.2"/>
+        <!-- Plaque socle -->
+        <rect x="10" y="20" width="8" height="1.5" rx="0.5" stroke="#d4af6a" stroke-width="0.8" fill="none"/>
+        <line x1="11" y1="21.5" x2="17" y2="21.5" stroke="#d4af6a" stroke-width="1" stroke-linecap="round"/>
+        <!-- Deux étoiles -->
+        <text x="11.5" y="13.5" text-anchor="middle" font-size="4" fill="#d4af6a">★</text>
+        <text x="16.5" y="13.5" text-anchor="middle" font-size="4" fill="#d4af6a">★</text>
+      </svg>
+      <span><strong>2 étoiles</strong> · 25 points</span>
+    </div>
+
+    <!-- Tentative unique -->
+    <div class="pill">
+      <span style="font-size:0.9rem;">⚡</span>
+      <span>Tentative <strong>unique</strong> pour la plupart</span>
+    </div>
+
+    <!-- Trophée grisé = indice -->
+    <div class="pill">
+      <span style="font-size:0.9rem; opacity:0.4;">🏆</span>
+      <span>Trophée <strong>grisé</strong> = succès à découvrir</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ GALERIE — 1 ÉTOILE ══ -->
+<section class="category-section">
+
+  <div class="category-header">
+    <div class="category-icon">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 9h10v7.5c0 3.5-2.2 6.2-5 6.2s-5-2.7-5-6.2V9z" stroke="#c5bce0" stroke-width="1.4" fill="none" opacity="0.9"/>
+        <path d="M13 11.5H10c0 3 1.2 5 2.5 5.8" stroke="#c5bce0" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M23 11.5H26c0 3-1.2 5-2.5 5.8" stroke="#c5bce0" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <line x1="18" y1="22.7" x2="18" y2="26" stroke="#c5bce0" stroke-width="1.4" opacity="0.9"/>
+        <line x1="14" y1="26" x2="22" y2="26" stroke="#c5bce0" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+        <text x="18" y="17.5" text-anchor="middle" font-size="6.5" fill="#c5bce0">★</text>
+      </svg>
+    </div>
+    <div class="category-info">
+      <div class="category-label">Catégorie</div>
+      <div class="category-name">Trophée 1 étoile</div>
+    </div>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="succes-grid">
+
+    <!-- SUCCÈS 01 -->
+    <a href="succes-01-atchoum.html" class="succes-card card-1etoile">
+
+      <!-- Trophée grisé dans le coin -->
+      <div class="card-badge-corner trophy-mini">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5h6v4.5c0 2.1-1.3 3.7-3 3.7s-3-1.6-3-3.7V5z" stroke="white" stroke-width="1" fill="none" opacity="0.25"/>
+          <path d="M8 6.5H6.5c0 1.8.7 3 1.5 3.5" stroke="white" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.2"/>
+          <path d="M14 6.5H15.5c0 1.8-.7 3-1.5 3.5" stroke="white" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.2"/>
+          <line x1="11" y1="13.2" x2="11" y2="15.5" stroke="white" stroke-width="1" opacity="0.25"/>
+          <line x1="8.5" y1="15.5" x2="13.5" y2="15.5" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+          <text x="11" y="10.5" text-anchor="middle" font-size="4" fill="white" opacity="0.25">★</text>
+        </svg>
+      </div>
+
+      <div class="card-sticker">
+        <img src="images/sticker-atchoum.png" alt="Bek éternuant — autocollant Atchoum">
+      </div>
+
+      <div class="card-body">
+        <div class="card-numero">Succès 01 · · ·</div>
+        <div class="card-name">« <em>Atchoum !</em> »</div>
+        <div class="card-meta">
+          <span class="card-pts">+ 5 points</span>
+          <span class="card-sep">·</span>
+          <span>Trophée 1 étoile</span>
+          <span class="card-sep">·</span>
+          <span>Performance orale</span>
+        </div>
+        <p class="card-condition">Imiter l'éternuement de Bek avec engagement et expressivité — une vraie tentative, pas une lecture.</p>
+        <div class="card-cta">Voir les détails</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ══ GALERIE — 2 ÉTOILES ══ -->
+<section class="category-section" style="padding-top:0;">
+
+  <div class="category-header">
+    <div class="category-icon">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 8h10v7.5c0 3.5-2.2 6.2-5 6.2s-5-2.7-5-6.2V8z" stroke="#d4af6a" stroke-width="1.4" fill="none" opacity="0.9"/>
+        <path d="M13 10.5H10c0 3 1.2 5 2.5 5.8" stroke="#d4af6a" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M23 10.5H26c0 3-1.2 5-2.5 5.8" stroke="#d4af6a" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <line x1="18" y1="21.7" x2="18" y2="24" stroke="#d4af6a" stroke-width="1.4" opacity="0.9"/>
+        <!-- Plaque socle -->
+        <rect x="13.5" y="24" width="9" height="2" rx="0.8" stroke="#d4af6a" stroke-width="0.9" fill="none" opacity="0.9"/>
+        <line x1="15" y1="25" x2="21" y2="25" stroke="#d4af6a" stroke-width="0.7" opacity="0.5"/>
+        <!-- Deux étoiles -->
+        <text x="15" y="17" text-anchor="middle" font-size="5.5" fill="#d4af6a">★</text>
+        <text x="21" y="17" text-anchor="middle" font-size="5.5" fill="#d4af6a">★</text>
+      </svg>
+    </div>
+    <div class="category-info">
+      <div class="category-label">Catégorie</div>
+      <div class="category-name">Trophée 2 étoiles</div>
+    </div>
+    <div class="category-rule"></div>
+  </div>
+
+  <div class="succes-grid">
+
+    <!-- SUCCÈS 02 -->
+    <a href="succes-02-tete.html" class="succes-card card-2etoiles">
+
+      <!-- Trophée grisé dans le coin -->
+      <div class="card-badge-corner trophy-mini">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5h6v4.5c0 2.1-1.3 3.7-3 3.7s-3-1.6-3-3.7V5z" stroke="white" stroke-width="1" fill="none" opacity="0.25"/>
+          <path d="M8 6.5H6.5c0 1.8.7 3 1.5 3.5" stroke="white" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.2"/>
+          <path d="M14 6.5H15.5c0 1.8-.7 3-1.5 3.5" stroke="white" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.2"/>
+          <line x1="11" y1="13.2" x2="11" y2="15" stroke="white" stroke-width="1" opacity="0.25"/>
+          <rect x="8" y="15" width="6" height="1.2" rx="0.4" stroke="white" stroke-width="0.7" fill="none" opacity="0.2"/>
+          <text x="8.5" y="10.5" text-anchor="middle" font-size="3.5" fill="white" opacity="0.25">★</text>
+          <text x="13.5" y="10.5" text-anchor="middle" font-size="3.5" fill="white" opacity="0.25">★</text>
+        </svg>
+      </div>
+
+      <div class="card-sticker">
+        <img src="images/sticker-tete.png" alt="Keb pointant sa tempe — autocollant Toute une tête">
+      </div>
+
+      <div class="card-body">
+        <div class="card-numero">Succès 02 · · ·</div>
+        <div class="card-name">« <em>C'est toute une tête, ça !</em> »</div>
+        <div class="card-meta">
+          <span class="card-pts">+ 25 points</span>
+          <span class="card-sep">·</span>
+          <span>Trophée 2 étoiles</span>
+          <span class="card-sep">·</span>
+          <span>Déduction visuelle</span>
+        </div>
+        <p class="card-condition">Sur la toute première diapositive : un cercle blanc sur fond noir. Deviner ce que c'est en trois essais ou moins.</p>
+        <div class="card-cta">Voir les détails</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span>Keb &amp; Bek</span> · L'univers des succès · kebbek-fr.github.io/univers
+</footer>
+
+</body>
+</html>
