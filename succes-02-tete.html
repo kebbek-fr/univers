@@ -30,7 +30,6 @@
     min-height: 100vh;
   }
 
-  /* Grain */
   body::after {
     content: '';
     position: fixed;
@@ -41,7 +40,6 @@
     opacity: 0.35;
   }
 
-  /* Nav */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -76,7 +74,6 @@
     color: rgba(245,240,232,0.2);
   }
 
-  /* ── HERO ── */
   .fiche-hero {
     min-height: 100vh;
     display: flex;
@@ -108,7 +105,6 @@
     z-index: 1;
   }
 
-  /* Contenu — Keb est à droite, texte à gauche */
   .hero-sticker {
     order: 2;
     display: flex;
@@ -116,9 +112,7 @@
     justify-content: center;
   }
 
-  .hero-content {
-    order: 1;
-  }
+  .hero-content { order: 1; }
 
   .sticker-frame {
     position: relative;
@@ -179,7 +173,6 @@
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.7;
     margin-bottom: 0.8rem;
     opacity: 0;
     animation: fadeUp 0.5s 0.2s ease forwards;
@@ -195,10 +188,7 @@
     animation: fadeUp 0.5s 0.35s ease forwards;
   }
 
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hero-title em { font-style: italic; color: var(--gold); }
 
   .hero-tags {
     display: flex;
@@ -220,22 +210,17 @@
     color: rgba(245,240,232,0.35);
   }
 
-  .tag.highlight {
-    border-color: rgba(212,175,106,0.4);
-    color: var(--gold);
-  }
+  .tag.highlight { border-color: rgba(212,175,106,0.4); color: var(--gold); }
 
   .hero-divider {
     width: 40px;
     height: 1px;
     background: var(--gold);
-    opacity: 0.4;
-    margin-bottom: 1.5rem;
     opacity: 0;
+    margin-bottom: 1.5rem;
     animation: fadeUp 0.5s 0.45s ease forwards;
   }
 
-  /* ── CONTENU ── */
   .fiche-main {
     max-width: 900px;
     margin: 0 auto;
@@ -255,7 +240,6 @@
   }
 
   .info-card.span-2 { grid-column: 1 / 3; }
-
   .info-card:nth-child(1) { animation-delay: 0.6s; }
   .info-card:nth-child(2) { animation-delay: 0.75s; }
   .info-card:nth-child(3) { animation-delay: 0.9s; }
@@ -278,15 +262,8 @@
     line-height: 1.8;
   }
 
-  .info-card-text strong {
-    color: var(--cream);
-    font-weight: 700;
-  }
-
-  .info-card-text em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .info-card-text strong { color: var(--cream); font-weight: 700; }
+  .info-card-text em { font-style: italic; color: var(--gold); }
 
   .card-condition-block {
     border-color: rgba(212,175,106,0.2);
@@ -303,13 +280,7 @@
     background: linear-gradient(to right, transparent, rgba(212,175,106,0.5), transparent);
   }
 
-  /* Visualisation des 3 essais */
-  .essais-grid {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.2rem;
-    flex-wrap: wrap;
-  }
+  .essais-grid { display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
 
   .essai-item {
     display: flex;
@@ -324,11 +295,7 @@
     color: rgba(245,240,232,0.4);
   }
 
-  .essai-item .essai-num {
-    font-weight: 500;
-    font-size: 0.7rem;
-    color: rgba(245,240,232,0.6);
-  }
+  .essai-item .essai-num { font-weight: 500; font-size: 0.7rem; color: rgba(245,240,232,0.6); }
 
   .essai-item.success {
     border-color: rgba(122,158,135,0.3);
@@ -352,7 +319,6 @@
     margin-top: 1rem;
   }
 
-  /* Carte indice visuel */
   .cercle-demo {
     display: flex;
     align-items: center;
@@ -363,27 +329,13 @@
     margin-bottom: 1rem;
   }
 
-  .cercle-inner {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: white;
-  }
+  .cercle-inner { width: 60px; height: 60px; border-radius: 50%; background: white; }
 
-  /* Badge display */
-  .badge-display {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
+  .badge-display { display: flex; align-items: center; gap: 1.5rem; }
   .badge-trophy { flex-shrink: 0; }
   .badge-desc { flex: 1; }
 
-  .back-wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 2rem 4rem;
-  }
+  .back-wrap { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
 
   .back-link {
     display: inline-flex;
@@ -400,10 +352,7 @@
     padding: 0.5rem 1.2rem;
     transition: all 0.25s;
   }
-  .back-link:hover {
-    color: var(--gold);
-    border-color: rgba(212,175,106,0.4);
-  }
+  .back-link:hover { color: var(--gold); border-color: rgba(212,175,106,0.4); }
   .back-link::before { content: '←'; }
 
   footer {
@@ -435,19 +384,16 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="succes.html" class="nav-back">Les succès</a>
-  <span class="nav-title">· Succès 02</span>
+  <span class="nav-title">· C'est toute une tête, ça !</span>
 </nav>
 
-<!-- ══ HERO ══ -->
 <section class="fiche-hero">
   <div class="hero-layout">
 
-    <!-- Texte -->
     <div class="hero-content">
-      <div class="hero-numero">Succès 02 · Trophée 2 étoiles</div>
+      <div class="hero-numero">Trophée 2 étoiles</div>
       <h1 class="hero-title">«&thinsp;<em>C'est toute une tête, ça !</em>&thinsp;»</h1>
       <div class="hero-divider"></div>
       <div class="hero-tags">
@@ -457,25 +403,21 @@
         <span class="tag">⚡ Tentative unique</span>
       </div>
       <p style="font-size:0.9rem;font-weight:300;color:var(--cream-dim);line-height:1.8;opacity:0;animation:fadeUp 0.5s 0.65s ease forwards;">
-        Le succès le plus riche du premier niveau — 25 points pour ceux qui ouvrent l'œil dès le départ. La première diapositive du cours cache quelque chose.
+        Pour ceux qui ouvrent l'œil dès le départ. La première diapositive du cours cache quelque chose.
       </p>
     </div>
 
-    <!-- Sticker Keb -->
     <div class="hero-sticker">
       <div class="sticker-frame">
         <img src="images/autocollant-tout-une-tete.png" alt="Keb pointant sa tempe — autocollant Toute une tête">
         <div class="trophy-badge">
-          <!-- Trophée 2 étoiles dessiné -->
           <svg width="36" height="50" viewBox="0 0 36 50" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 5h16v11c0 5.3-3.6 9.3-8 9.3S10 21.3 10 16V5z" stroke="#d4af6a" stroke-width="1.6" fill="none"/>
             <path d="M10 8H7c0 4.7 2 7.8 3.5 9" stroke="#d4af6a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
             <path d="M26 8h3c0 4.7-2 7.8-3.5 9" stroke="#d4af6a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
             <line x1="18" y1="25.3" x2="18" y2="30" stroke="#d4af6a" stroke-width="1.6"/>
-            <!-- Plaque socle -->
             <rect x="12" y="30" width="12" height="3" rx="1.2" stroke="#d4af6a" stroke-width="1" fill="none"/>
             <line x1="14" y1="31.5" x2="22" y2="31.5" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-            <!-- Deux étoiles -->
             <text x="13" y="19" text-anchor="middle" font-size="8" fill="#d4af6a">★</text>
             <text x="23" y="19" text-anchor="middle" font-size="8" fill="#d4af6a">★</text>
           </svg>
@@ -487,17 +429,13 @@
   </div>
 </section>
 
-<!-- ══ CONTENU ══ -->
 <div class="fiche-main">
 
-  <!-- Condition -->
   <div class="info-card card-condition-block span-2">
     <div class="info-card-label">Condition de déblocage</div>
     <p class="info-card-text">
       Sur la <strong>toute première diapositive</strong> du cours, l'élève ne voit qu'un <em>cercle blanc sur fond noir</em>. Rien d'autre. S'il est capable de deviner ce que c'est en <strong>trois essais ou moins</strong>, il débloque le succès.
     </p>
-
-    <!-- Visualisation des essais -->
     <div class="essais-grid">
       <div class="essai-item">
         <span class="essai-num">1</span>
@@ -512,14 +450,11 @@
         <span>Réponse correcte</span>
       </div>
     </div>
-
     <div class="tentative-unique">⚡ Tentative unique — une seule session pour réussir</div>
   </div>
 
-  <!-- L'indice visuel -->
   <div class="info-card">
     <div class="info-card-label">Ce que l'élève voit</div>
-    <!-- Représentation stylisée de la diapositive -->
     <div class="cercle-demo">
       <div class="cercle-inner"></div>
     </div>
@@ -528,7 +463,6 @@
     </p>
   </div>
 
-  <!-- Description du badge -->
   <div class="info-card">
     <div class="info-card-label">Description du badge</div>
     <p class="info-card-text">
@@ -536,7 +470,6 @@
     </p>
   </div>
 
-  <!-- Récompense -->
   <div class="info-card span-2">
     <div class="info-card-label">Récompense</div>
     <div class="badge-display">
@@ -548,14 +481,13 @@
           <line x1="26" y1="39.2" x2="26" y2="46" stroke="#d4af6a" stroke-width="2"/>
           <rect x="18" y="46" width="16" height="4" rx="1.5" stroke="#d4af6a" stroke-width="1.4" fill="none"/>
           <line x1="20" y1="48" x2="32" y2="48" stroke="#d4af6a" stroke-width="1" opacity="0.5"/>
-          <!-- Deux étoiles -->
           <text x="18" y="30" text-anchor="middle" font-size="12" fill="#d4af6a">★</text>
           <text x="34" y="30" text-anchor="middle" font-size="12" fill="#d4af6a">★</text>
         </svg>
       </div>
       <div class="badge-desc">
         <p class="info-card-text">
-          <strong>+ 25 points</strong> — le succès le plus généreux du premier niveau. Ces points s'ajoutent au total et servent de monnaie d'échange pour personnaliser l'avatar. Certains accessoires premium ne sont accessibles qu'à partir d'un certain seuil de points accumulés.
+          <strong>+ 25 points</strong> ajoutés au total de l'élève. Ces points servent de monnaie d'échange pour personnaliser l'avatar. Certains accessoires premium ne sont accessibles qu'à partir d'un certain seuil de points accumulés.
         </p>
       </div>
     </div>
@@ -563,13 +495,12 @@
 
 </div>
 
-<!-- Lien retour -->
 <div class="back-wrap">
   <a href="succes.html" class="back-link">Retour aux succès</a>
 </div>
 
 <footer>
-  <span>Keb &amp; Bek</span> · Succès 02 · C'est toute une tête, ça ! · kebbek-fr.github.io/univers
+  <span>Keb &amp; Bek</span> · C'est toute une tête, ça ! · kebbek-fr.github.io/univers
 </footer>
 
 </body>
