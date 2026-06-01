@@ -31,7 +31,6 @@
     min-height: 100vh;
   }
 
-  /* Grain */
   body::after {
     content: '';
     position: fixed;
@@ -42,7 +41,6 @@
     opacity: 0.35;
   }
 
-  /* Nav */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -77,7 +75,6 @@
     color: rgba(245,240,232,0.2);
   }
 
-  /* ── HERO DE LA FICHE ── */
   .fiche-hero {
     min-height: 100vh;
     display: flex;
@@ -88,7 +85,6 @@
     overflow: hidden;
   }
 
-  /* Halo lavande */
   .fiche-hero::before {
     content: '';
     position: absolute;
@@ -110,7 +106,6 @@
     z-index: 1;
   }
 
-  /* Sticker côté gauche */
   .hero-sticker {
     display: flex;
     align-items: center;
@@ -125,7 +120,6 @@
     justify-content: center;
   }
 
-  /* Cercle de halo derrière le sticker */
   .sticker-frame::before {
     content: '';
     position: absolute;
@@ -150,7 +144,6 @@
     50% { transform: translateY(-10px) rotate(1deg); }
   }
 
-  /* Trophée en coin du sticker */
   .trophy-badge {
     position: absolute;
     bottom: -8px;
@@ -173,16 +166,12 @@
     font-weight: 500;
   }
 
-  /* Contenu côté droit */
-  .hero-content {}
-
   .hero-numero {
     font-family: 'DM Mono', monospace;
     font-size: 0.58rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--lavender-light);
-    opacity: 0.7;
     margin-bottom: 0.8rem;
     opacity: 0;
     animation: fadeUp 0.5s 0.2s ease forwards;
@@ -198,10 +187,7 @@
     animation: fadeUp 0.5s 0.35s ease forwards;
   }
 
-  .hero-title em {
-    font-style: italic;
-    color: var(--lavender-light);
-  }
+  .hero-title em { font-style: italic; color: var(--lavender-light); }
 
   .hero-tags {
     display: flex;
@@ -232,13 +218,11 @@
     width: 40px;
     height: 1px;
     background: var(--lavender-light);
-    opacity: 0.4;
-    margin-bottom: 1.5rem;
     opacity: 0;
+    margin-bottom: 1.5rem;
     animation: fadeUp 0.5s 0.45s ease forwards;
   }
 
-  /* ── CONTENU PRINCIPAL ── */
   .fiche-main {
     max-width: 900px;
     margin: 0 auto;
@@ -248,7 +232,6 @@
     gap: 1.5rem;
   }
 
-  /* ── CARTE D'INFO ── */
   .info-card {
     border: 1px solid rgba(245,240,232,0.07);
     border-radius: 16px;
@@ -258,10 +241,7 @@
     animation: fadeUp 0.5s ease forwards;
   }
 
-  .info-card.span-2 {
-    grid-column: 1 / 3;
-  }
-
+  .info-card.span-2 { grid-column: 1 / 3; }
   .info-card:nth-child(1) { animation-delay: 0.6s; }
   .info-card:nth-child(2) { animation-delay: 0.75s; }
   .info-card:nth-child(3) { animation-delay: 0.9s; }
@@ -284,17 +264,9 @@
     line-height: 1.8;
   }
 
-  .info-card-text strong {
-    color: var(--cream);
-    font-weight: 700;
-  }
+  .info-card-text strong { color: var(--cream); font-weight: 700; }
+  .info-card-text em { font-style: italic; color: var(--lavender-light); }
 
-  .info-card-text em {
-    font-style: italic;
-    color: var(--lavender-light);
-  }
-
-  /* Carte condition — accent visuel */
   .card-condition-block {
     border-color: rgba(155,142,196,0.2);
     background: rgba(155,142,196,0.04);
@@ -310,22 +282,10 @@
     background: linear-gradient(to right, transparent, rgba(155,142,196,0.5), transparent);
   }
 
-  /* Carte badge — avec le trophée dessiné */
-  .badge-display {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
+  .badge-display { display: flex; align-items: center; gap: 1.5rem; }
+  .badge-trophy { flex-shrink: 0; }
+  .badge-desc { flex: 1; }
 
-  .badge-trophy {
-    flex-shrink: 0;
-  }
-
-  .badge-desc {
-    flex: 1;
-  }
-
-  /* Alerte tentative unique */
   .tentative-unique {
     display: inline-flex;
     align-items: center;
@@ -341,7 +301,8 @@
     margin-top: 1rem;
   }
 
-  /* Lien retour */
+  .back-wrap { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -356,19 +317,9 @@
     border-radius: 100px;
     padding: 0.5rem 1.2rem;
     transition: all 0.25s;
-    margin-top: 3rem;
   }
-  .back-link:hover {
-    color: var(--lavender-light);
-    border-color: rgba(155,142,196,0.4);
-  }
+  .back-link:hover { color: var(--lavender-light); border-color: rgba(155,142,196,0.4); }
   .back-link::before { content: '←'; }
-
-  .back-wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 2rem 4rem;
-  }
 
   footer {
     text-align: center;
@@ -386,13 +337,8 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Responsive ── */
   @media (max-width: 680px) {
-    .hero-layout {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      text-align: center;
-    }
+    .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
     .hero-tags { justify-content: center; }
     .hero-divider { margin: 0 auto 1.5rem; }
     .fiche-main { grid-template-columns: 1fr; }
@@ -402,22 +348,18 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="succes.html" class="nav-back">Les succès</a>
-  <span class="nav-title">· Succès 01</span>
+  <span class="nav-title">· Atchoum !</span>
 </nav>
 
-<!-- ══ HERO ══ -->
 <section class="fiche-hero">
   <div class="hero-layout">
 
-    <!-- Sticker + trophée -->
     <div class="hero-sticker">
       <div class="sticker-frame">
         <img src="images/autocollant-atchoum.png" alt="Bek éternuant — autocollant Atchoum">
         <div class="trophy-badge">
-          <!-- Trophée 1 étoile dessiné -->
           <svg width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 5h14v10c0 4.9-3.1 8.7-7 8.7s-7-3.8-7-8.7V5z" stroke="#c5bce0" stroke-width="1.6" fill="none"/>
             <path d="M11 8H8c0 4.2 1.7 7 3.5 8.2" stroke="#c5bce0" stroke-width="1.4" fill="none" stroke-linecap="round"/>
@@ -431,29 +373,24 @@
       </div>
     </div>
 
-    <!-- Texte -->
     <div class="hero-content">
-      <div class="hero-numero">Succès 01 · Trophée 1 étoile</div>
+      <div class="hero-numero">Trophée 1 étoile</div>
       <h1 class="hero-title">«&thinsp;<em>Atchoum !</em>&thinsp;»</h1>
       <div class="hero-divider"></div>
       <div class="hero-tags">
         <span class="tag highlight">Performance orale</span>
-        <span class="tag">Premier succès</span>
-        <span class="tag">5 points</span>
         <span class="tag">⚡ Tentative unique</span>
       </div>
       <p style="font-size:0.9rem;font-weight:300;color:var(--cream-dim);line-height:1.8;opacity:0;animation:fadeUp 0.5s 0.65s ease forwards;">
-        Le premier succès débloquable du cours — et celui qui donne le ton. Ce n'est pas un test de grammaire ni de vocabulaire, c'est un test d'engagement.
+        Un des premiers succès débloquables du cours — et un test d'engagement. Ce n'est pas un test de grammaire ni de vocabulaire : c'est une invitation à libérer la voix.
       </p>
     </div>
 
   </div>
 </section>
 
-<!-- ══ CONTENU ══ -->
 <div class="fiche-main">
 
-  <!-- Condition de déblocage -->
   <div class="info-card card-condition-block span-2">
     <div class="info-card-label">Condition de déblocage</div>
     <p class="info-card-text">
@@ -462,7 +399,6 @@
     <div class="tentative-unique">⚡ Tentative unique — une seule chance</div>
   </div>
 
-  <!-- Description du badge -->
   <div class="info-card">
     <div class="info-card-label">Description du badge</div>
     <p class="info-card-text">
@@ -470,7 +406,6 @@
     </p>
   </div>
 
-  <!-- Contexte pédagogique -->
   <div class="info-card">
     <div class="info-card-label">Pourquoi ce succès ?</div>
     <p class="info-card-text">
@@ -478,7 +413,6 @@
     </p>
   </div>
 
-  <!-- Valeur -->
   <div class="info-card span-2">
     <div class="info-card-label">Récompense</div>
     <div class="badge-display">
@@ -502,13 +436,12 @@
 
 </div>
 
-<!-- Lien retour -->
 <div class="back-wrap">
   <a href="succes.html" class="back-link">Retour aux succès</a>
 </div>
 
 <footer>
-  <span>Keb &amp; Bek</span> · Succès 01 · Atchoum ! · kebbek-fr.github.io/univers
+  <span>Keb &amp; Bek</span> · Atchoum ! · kebbek-fr.github.io/univers
 </footer>
 
 </body>
