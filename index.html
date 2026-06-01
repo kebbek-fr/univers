@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Univers — Keb & Bek</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0d0b;
+    --ink-2: #1a1612;
+    --amber: #c8873a;
+    --amber-light: #e8a855;
+    --amber-glow: rgba(200,135,58,0.2);
+    --lavender: #9b8ec4;
+    --lavender-light: #c5bce0;
+    --sage: #7a9e87;
+    --cream: #f5f0e8;
+    --cream-dim: rgba(245,240,232,0.6);
+    --cream-faint: rgba(245,240,232,0.08);
+    --gold: #d4af6a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Radial ambient */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 60%, rgba(200,135,58,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 70% 40%, rgba(155,142,196,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(200,135,58,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Stars */
+  .stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--cream);
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle var(--d) var(--delay) infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: var(--op); transform: scale(1); }
+  }
+
+  /* ── PERSONNAGES ── */
+  .personnages {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+    padding: 0 4vw;
+  }
+
+  .perso-silhouette {
+    opacity: 0;
+    animation: riseUp 1.2s ease forwards;
+  }
+
+  .perso-silhouette.keb {
+    animation-delay: 0.8s;
+  }
+  .perso-silhouette.bek {
+    animation-delay: 1s;
+  }
+
+  @keyframes riseUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .perso-silhouette svg {
+    display: block;
+  }
+
+  /* ── HERO CONTENT ── */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s ease forwards;
+  }
+
+  .hero-title .line-1 {
+    display: inline;
+    color: var(--cream);
+  }
+
+  .hero-title .line-2 {
+    display: inline;
+    font-style: italic;
+    color: var(--amber-light);
+    text-shadow: 0 0 80px rgba(200,135,58,0.4);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--cream-dim);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 1.5rem auto 0;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s ease forwards;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--amber);
+    margin: 1.8rem auto;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s ease forwards;
+  }
+
+  .hero-scroll {
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.9s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAVIGATION SECTIONS ── */
+  .sections {
+    padding: 6rem 2rem 8rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .sections-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0.7;
+  }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* ── CARTE DE SECTION ── */
+  .section-card {
+    position: relative;
+    border: 1px solid rgba(245,240,232,0.07);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    background: rgba(245,240,232,0.03);
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .section-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200,135,58,0.3);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,135,58,0.15);
+  }
+
+  /* Accent glow */
+  .section-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--card-accent, var(--amber)), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .section-card:hover::before { opacity: 1; }
+
+  /* Background glow blob */
+  .section-card::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--card-glow, rgba(200,135,58,0.08)) 0%, transparent 70%);
+    top: -60px;
+    right: -60px;
+    pointer-events: none;
+    transition: transform 0.4s ease;
+  }
+  .section-card:hover::after { transform: scale(1.3); }
+
+  .card-numero {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: rgba(245,240,232,0.25);
+    margin-bottom: 1.5rem;
+  }
+
+  .card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    line-height: 1;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    line-height: 1.15;
+  }
+
+  .card-title em {
+    font-style: italic;
+    color: var(--card-accent, var(--amber-light));
+  }
+
+  .card-desc {
+    font-size: 0.84rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.45);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    border: 1px solid rgba(245,240,232,0.1);
+    color: rgba(245,240,232,0.35);
+  }
+
+  .card-tag.actif {
+    border-color: rgba(122,158,135,0.4);
+    color: var(--sage);
+  }
+
+  .card-tag.bientot {
+    border-color: rgba(155,142,196,0.3);
+    color: var(--lavender-light);
+  }
+
+  /* ── COULEURS PAR CARTE ── */
+  .card-succes {
+    --card-accent: var(--amber-light);
+    --card-glow: rgba(200,135,58,0.1);
+  }
+
+  .card-cours {
+    --card-accent: var(--lavender-light);
+    --card-glow: rgba(155,142,196,0.1);
+  }
+
+  .card-classement {
+    --card-accent: var(--gold);
+    --card-glow: rgba(212,175,106,0.1);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(245,240,232,0.05);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.15);
+  }
+
+  footer span {
+    color: var(--amber);
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════ -->
+<section class="hero">
+
+  <!-- Étoiles -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Personnages SVG -->
+  <div class="personnages">
+
+    <!-- KEB (gauche) — silhouette bonhomme allumette style cours -->
+    <div class="perso-silhouette keb">
+      <svg width="120" height="340" viewBox="0 0 120 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tête -->
+        <circle cx="60" cy="50" r="28" stroke="white" stroke-width="2.5" fill="none" opacity="0.85"/>
+        <!-- Corps -->
+        <line x1="60" y1="78" x2="60" y2="200" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Bras gauche levé -->
+        <line x1="60" y1="120" x2="20" y2="80" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Bras droit -->
+        <line x1="60" y1="120" x2="100" y2="155" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Jambe gauche -->
+        <line x1="60" y1="200" x2="30" y2="280" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Jambe droite -->
+        <line x1="60" y1="200" x2="90" y2="280" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Doigts index+majeur à la tempe -->
+        <line x1="20" y1="80" x2="10" y2="62" stroke="white" stroke-width="2" opacity="0.7"/>
+        <line x1="20" y1="80" x2="18" y2="60" stroke="white" stroke-width="2" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <!-- BEK (droite) — silhouette avec chignon énorme -->
+    <div class="perso-silhouette bek">
+      <svg width="140" height="360" viewBox="0 0 140 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tête -->
+        <circle cx="80" cy="90" r="26" stroke="white" stroke-width="2.5" fill="none" opacity="0.85"/>
+        <!-- Chignon énorme directement sur la tête -->
+        <ellipse cx="80" cy="66" rx="30" ry="20" stroke="white" stroke-width="2.5" fill="#0f0d0b" opacity="0.95"/>
+        <ellipse cx="80" cy="58" rx="20" ry="13" stroke="white" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- Mèches latérales longues -->
+        <path d="M58 98 Q40 158 35 238" stroke="white" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M102 98 Q118 158 120 238" stroke="white" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- Corps -->
+        <line x1="80" y1="116" x2="80" y2="230" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Bras -->
+        <line x1="80" y1="148" x2="35" y2="188" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <line x1="80" y1="148" x2="118" y2="183" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <!-- Jambes -->
+        <line x1="80" y1="230" x2="52" y2="318" stroke="white" stroke-width="2.5" opacity="0.85"/>
+        <line x1="80" y1="230" x2="108" y2="318" stroke="white" stroke-width="2.5" opacity="0.85"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- Contenu central -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">Keb &amp; Bek · Cours de français québécois</div>
+    <h1 class="hero-title">
+      <span class="line-1">L'</span>
+      <span class="line-2">Univers</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">Un monde à découvrir, une langue à apprivoiser — bienvenue dans l'univers de Keb et Bek.</p>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Explorer
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ SECTIONS ═══════════════════════════════════ -->
+<section class="sections">
+  <div class="sections-label">· Choisir une destination ·</div>
+
+  <div class="sections-grid">
+
+    <!-- L'UNIVERS DES SUCCÈS -->
+    <a href="succes.html" class="section-card card-succes">
+      <div class="card-numero">01 · · ·</div>
+      <span class="card-icon">✦</span>
+      <h2 class="card-title">L'univers des <em>succès</em></h2>
+      <p class="card-desc">Trophées, badges et réalisations — débloquez des succès au fil de votre progression dans le cours.</p>
+      <span class="card-tag actif">✦ actif</span>
+    </a>
+
+    <!-- LE COURS -->
+    <a href="cours.html" class="section-card card-cours">
+      <div class="card-numero">02 · · ·</div>
+      <span class="card-icon">◈</span>
+      <h2 class="card-title">Le <em>cours</em></h2>
+      <p class="card-desc">Leçons, histoires et documents — le français québécois authentique, niveau par niveau.</p>
+      <span class="card-tag bientot">◌ bientôt</span>
+    </a>
+
+    <!-- CLASSEMENT -->
+    <a href="classement.html" class="section-card card-classement">
+      <div class="card-numero">03 · · ·</div>
+      <span class="card-icon">◇</span>
+      <h2 class="card-title">Le <em>classement</em></h2>
+      <p class="card-desc">Points, monnaie de participation et rang — suivez votre progression et celle des autres.</p>
+      <span class="card-tag bientot">◌ bientôt</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════ -->
+<footer>
+  <span>Keb &amp; Bek</span> · L'Univers · Cours de français québécois · kebbek-fr.github.io/univers
+</footer>
+
+<script>
+  // Génération des étoiles
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      --d: ${2 + Math.random() * 4}s;
+      --delay: ${Math.random() * 5}s;
+      --op: ${0.2 + Math.random() * 0.6};
+      width: ${1 + Math.random() * 2}px;
+      height: ${1 + Math.random() * 2}px;
+    `;
+    starsEl.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
