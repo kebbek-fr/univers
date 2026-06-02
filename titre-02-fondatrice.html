@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Titre — La Fondatrice · Keb & Bek</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#0f0d0b; --amber:#c8873a; --amber-light:#e8a855;
+    --gold:#d4af6a; --lavender:#9b8ec4; --lavender-light:#c5bce0;
+    --sage:#7a9e87; --cream:#f5f0e8; --cream-dim:rgba(245,240,232,0.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Nunito',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;min-height:100vh;}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.35;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;
+    display:flex;align-items:center;gap:1rem;
+    background:linear-gradient(to bottom,rgba(15,13,11,0.96),transparent);}
+  .nav-back{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;
+    text-transform:uppercase;color:rgba(245,240,232,0.4);text-decoration:none;
+    display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
+  .nav-back:hover{color:var(--amber-light);}
+  .nav-back::before{content:'←';}
+  .nav-title{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;
+    text-transform:uppercase;color:rgba(245,240,232,0.2);}
+
+  .fiche-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+  .fiche-hero::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 55% 60% at 65% 50%,rgba(212,175,106,0.1) 0%,transparent 65%),
+               radial-gradient(ellipse 40% 40% at 35% 30%,rgba(200,135,58,0.06) 0%,transparent 60%);
+    pointer-events:none;}
+
+  .hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:900px;
+    width:100%;align-items:center;position:relative;z-index:1;}
+
+  .hero-image-zone{display:flex;align-items:center;justify-content:center;}
+  .image-frame{position:relative;display:flex;align-items:center;justify-content:center;}
+  .image-frame::before{content:'';position:absolute;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle,rgba(212,175,106,0.12) 0%,transparent 70%);pointer-events:none;}
+  .fiche-img{width:220px;object-fit:contain;
+    filter:drop-shadow(0 8px 32px rgba(212,175,106,0.3)) drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    animation:floatSticker 5s ease-in-out infinite;}
+  @keyframes floatSticker{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+
+  .hero-numero{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.3em;
+    text-transform:uppercase;color:var(--amber-light);margin-bottom:0.8rem;
+    opacity:0;animation:fadeUp 0.5s 0.2s ease forwards;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);
+    font-weight:900;line-height:1.05;margin-bottom:0.5rem;
+    opacity:0;animation:fadeUp 0.5s 0.35s ease forwards;}
+  .hero-title em{font-style:italic;color:var(--amber-light);}
+  .hero-divider{width:40px;height:1px;background:var(--amber-light);
+    opacity:0;margin-bottom:1.5rem;animation:fadeUp 0.5s 0.45s ease forwards;}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.8rem;
+    opacity:0;animation:fadeUp 0.5s 0.5s ease forwards;}
+  .tag{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:0.12em;
+    text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:100px;
+    border:1px solid rgba(245,240,232,0.1);color:rgba(245,240,232,0.35);}
+  .tag.gold{border-color:rgba(212,175,106,0.4);color:var(--gold);}
+  .hero-desc{font-size:0.9rem;font-weight:300;color:var(--cream-dim);line-height:1.8;
+    opacity:0;animation:fadeUp 0.5s 0.65s ease forwards;}
+
+  .fiche-main{max-width:900px;margin:0 auto;padding:0 2rem 6rem;
+    display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .info-card{border:1px solid rgba(245,240,232,0.07);border-radius:16px;
+    background:rgba(245,240,232,0.025);padding:1.8rem;
+    opacity:0;animation:fadeUp 0.5s ease forwards;}
+  .info-card.span-2{grid-column:1/3;}
+  .info-card.gold-border{border-color:rgba(212,175,106,0.2);background:rgba(212,175,106,0.04);position:relative;overflow:hidden;}
+  .info-card.gold-border::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(to right,transparent,rgba(212,175,106,0.5),transparent);}
+  .info-card:nth-child(1){animation-delay:0.6s;}
+  .info-card:nth-child(2){animation-delay:0.75s;}
+  .info-card:nth-child(3){animation-delay:0.9s;}
+  .info-card:nth-child(4){animation-delay:1.05s;}
+  .info-label{font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.28em;
+    text-transform:uppercase;color:var(--amber-light);opacity:0.7;margin-bottom:0.9rem;}
+  .info-text{font-size:0.9rem;font-weight:300;color:var(--cream-dim);line-height:1.8;}
+  .info-text strong{color:var(--cream);font-weight:700;}
+  .info-text em{font-style:italic;color:var(--amber-light);}
+
+  .unique-banner{display:inline-flex;align-items:center;gap:0.5rem;
+    font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;
+    color:var(--amber-light);background:rgba(212,175,106,0.08);
+    border:1px solid rgba(212,175,106,0.3);border-radius:100px;
+    padding:0.35rem 0.8rem;margin-top:1rem;}
+
+  .reward-row{display:flex;gap:1rem;margin-top:0.8rem;}
+  .reward-pill{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;
+    padding:0.4rem 1rem;border-radius:100px;border:1px solid rgba(212,175,106,0.35);
+    color:var(--gold);background:rgba(212,175,106,0.06);}
+
+  .back-wrap{max-width:900px;margin:0 auto;padding:0 2rem 4rem;}
+  .back-link{display:inline-flex;align-items:center;gap:0.6rem;
+    font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;
+    text-transform:uppercase;color:rgba(245,240,232,0.3);text-decoration:none;
+    border:1px solid rgba(245,240,232,0.08);border-radius:100px;padding:0.5rem 1.2rem;
+    transition:all 0.25s;}
+  .back-link:hover{color:var(--amber-light);border-color:rgba(212,175,106,0.4);}
+  .back-link::before{content:'←';}
+
+  footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(245,240,232,0.05);
+    font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;color:rgba(245,240,232,0.15);}
+  footer span{color:var(--amber);opacity:0.6;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:680px){
+    .hero-layout{grid-template-columns:1fr;gap:2.5rem;text-align:center;}
+    .hero-tags{justify-content:center;}
+    .hero-divider{margin:0 auto 1.5rem;}
+    .fiche-main{grid-template-columns:1fr;}
+    .info-card.span-2{grid-column:1;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="succes.html" class="nav-back">Les succès</a>
+  <span class="nav-title">· La Fondatrice</span>
+</nav>
+
+<section class="fiche-hero">
+  <div class="hero-layout">
+    <div class="hero-image-zone">
+      <div class="image-frame">
+        <img class="fiche-img" src="images/titre-unique-la-fondatrice.png" alt="La Fondatrice">
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-numero">Titre unique · Non reproductible</div>
+      <h1 class="hero-title">«&thinsp;<em>La Fondatrice</em>&thinsp;»</h1>
+      <div class="hero-divider"></div>
+      <div class="hero-tags">
+        <span class="tag gold">✦ Unique au monde</span>
+        <span class="tag">+5 000 PB</span>
+        <span class="tag">+5 000 P$</span>
+      </div>
+      <p class="hero-desc">Il existe des contributions qui ne se mesurent pas en points, en exercices ou en heures de cours. Certaines personnes sont là avant que tout existe — et c'est grâce à elles que tout existe.</p>
+    </div>
+  </div>
+</section>
+
+<div class="fiche-main">
+
+  <div class="info-card gold-border span-2">
+    <div class="info-label">Condition de déblocage</div>
+    <p class="info-text">Ce titre ne peut être attribué qu'à <strong>une seule personne au monde</strong>. Pour le mériter, il fallait être là dès les tout premiers jours du cours — avant les personnages bien dessinés, avant le système de points, avant les histoires. Il fallait avoir vu les premières versions maladroites, fait confiance à une méthode encore en construction, et contribué par sa seule présence et son engagement à faire exister ce cours tel qu'il est aujourd'hui.</p>
+    <p class="info-text" style="margin-top:0.8rem;">Ce titre est la reconnaissance d'une dette réelle. <em>Celui ou celle qui le porte a participé à quelque chose avant de savoir ce que ce serait.</em></p>
+    <div class="unique-banner">✦ Ne peut être attribué qu'une seule fois — définitivement</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-label">Pourquoi ce titre existe</div>
+    <p class="info-text">Tout cours a une origine. Et à cette origine, il y a toujours quelqu'un qui a dit <em>oui</em> avant que ce soit évident. Ce titre existe pour ne jamais oublier ce moment-là — et pour honorer la personne qui l'a rendu possible.</p>
+  </div>
+
+  <div class="info-card">
+    <div class="info-label">Ce que représente l'image</div>
+    <p class="info-text">Une toute petite Bek, assise en tailleur, empilant des blocs de bois avec une concentration absolue. Elle ne sait pas encore ce qu'elle construit. Mais elle construit.</p>
+  </div>
+
+  <div class="info-card span-2">
+    <div class="info-label">Récompense</div>
+    <p class="info-text" style="margin-bottom:1rem;">Ce titre octroie une récompense exceptionnelle, à la mesure de la contribution qu'il reconnaît.</p>
+    <div class="reward-row">
+      <span class="reward-pill">+ 5 000 PB — Points Bonis</span>
+      <span class="reward-pill">+ 5 000 P$ — Piastres</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="back-wrap">
+  <a href="succes.html" class="back-link">Retour aux succès et titres</a>
+</div>
+
+<footer>
+  <span>Keb &amp; Bek</span> · La Fondatrice · kebbek-fr.github.io/univers
+</footer>
+
+</body>
+</html>
